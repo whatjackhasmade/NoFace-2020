@@ -1,62 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Layout from 'components/layout';
-import Box from 'components/box';
-import Title from 'components/title';
-import Gallery from 'components/gallery';
-import IOExample from 'components/io-example';
-import Modal from 'containers/modal';
-import { graphql } from 'gatsby';
+import React from "react"
+import { Link } from "gatsby"
 
-const Index = ({ data }) => (
+import Layout from "../components/layout"
+import Image from "../components/image"
+import SEO from "../components/seo"
+
+const IndexPage = () => (
   <Layout>
-    <Box>
-      <Title as="h2" size="large">
-        {data.homeJson.content.childMarkdownRemark.rawMarkdownBody}
-      </Title>
-      <Modal>
-        <video
-          src="https://i.imgur.com/gzFqNSW.mp4"
-          playsInline
-          loop
-          autoPlay
-          muted
-        />
-      </Modal>
-    </Box>
-    <Gallery items={data.homeJson.gallery} />
-    <div style={{ height: '50vh' }} />
-    <IOExample />
+    <SEO title="Home" />
+    <h1>Hi people</h1>
+    <p>Welcome to your new Gatsby site.</p>
+    <p>Now go build something great.</p>
+    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+      <Image />
+    </div>
+    <Link to="/page-2/">Go to page 2</Link>
   </Layout>
-);
+)
 
-Index.propTypes = {
-  data: PropTypes.object.isRequired,
-};
-
-export default Index;
-
-export const query = graphql`
-  query HomepageQuery {
-    homeJson {
-      title
-      content {
-        childMarkdownRemark {
-          html
-          rawMarkdownBody
-        }
-      }
-      gallery {
-        title
-        copy
-        image {
-          childImageSharp {
-            fluid(maxHeight: 500, quality: 90) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+export default IndexPage
